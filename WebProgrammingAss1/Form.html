@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Form</title>
+
+    <!--Style sheet used for design of website-->
+    <link href="FormStyle.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+
+</head>
+<body>
+
+    <!--Form for user typed details-->
+    <!--Action method used to link js file to code-->
+    <form method="post" action="Output.cshtml">
+
+        <div>
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="First Name:" value="@Request.QueryString["fname"]" />
+        </div>
+
+        <div>
+            <label for="sname">Last Name:</label>
+            <input type="text" id="sname" name="Surname:" />
+        </div>
+
+
+        <div>
+            <label for="dob">D.O.B:</label>
+            <input type="date" id="dob" name="Date Of Birth:" />
+        </div>
+
+        <div>
+            <label for="height">Height (cm):</label>
+            <input type="text" id="height" name="Height:" />
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="Email:" />
+        </div>
+
+        <div>
+            <label for="number">Number (+353):</label>
+            <input type="number" id="number" name="Number:" />
+        </div>
+
+        <fieldset>
+            <!--User Choice for sex-->
+            <legend>Gender</legend>
+
+            <div>
+                <input type="radio" name="Gender:" id="male" value="Male" @(Request.QueryString["Gender"] == "Male" ? "checked" : "")  />
+                <label for="male">Male</label>
+            </div>
+
+            <div>
+                <input type="radio" name="Gender:" id="female" value="Female" />
+                <label for="female">Female</label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <!--User choice for Partner preference-->
+            <legend>What Is Your Partner Preference</legend>
+            <div>
+                <input type="radio" id="men" name="Partner Preference:" value="Men" />
+                <label for="men">Men</label>
+            </div>
+            
+            <div>
+                <input type="radio" id="women" name="Partner Preference:" value="Women" />
+                <label for="women">Women</label>
+            </div>
+
+            <div>
+                <input type="radio" id="either" name="Partner Preference:" value="Either" />
+                <label for="either">Either</label>
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <!--User choice for relationship status-->
+            <legend>Relationship Status</legend>
+
+            <div>
+                <input type="radio" name="Relationship Status:" id="single" value="Single" />
+                <label for="single">Single</label>
+            </div>
+
+            <div>
+                <input type="radio" name="Relationship Status:" id="married" value="Married" />
+                <label for="married">Married</label>
+            </div>
+
+            <div>
+                <input type="radio" name="Relationship Status:" id="inRelationship" value="In Relationship" />
+                <label for="inRelationship">Relationship</label>
+            </div>
+
+            <div>
+                <input type="radio" name="Relationship Status:" id="widowed" value="Widowed" />
+                <label for="widowed">Widowed</label>
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <!--User choice for interests-->
+            <legend>Intrests</legend>
+
+            <div>
+                <input type="checkbox" name="Intrests:" id="OutDoorSports" value="Outdoor Sports" />
+                <label for="OutDoorSports">Outdoor Sports</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="Intrests:" id="Movies" value="Movies" />
+                <label for="Movies">Movies</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="Intrests:" id="Music" value="Music" />
+                <label for="Music">Music</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="Intrests:" id="Gaming" value="Gaming" />
+                <label for="Gaming">Gaming</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="Intrests:" id="books" value="Books" />
+                <label for="books">Books</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="Intrests:" id="drinking" value="Drinking" />
+                <label for="drinking">Drinking</label>
+            </div>
+
+        </fieldset>
+
+        <input type="submit" value="Submit" />
+    </form>
+
+</body>
+</html>

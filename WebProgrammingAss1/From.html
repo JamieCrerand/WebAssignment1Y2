@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Form</title>
+
+    <link href="FormStyle.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+
+</head>
+<body>
+
+    <form method="get" action="Output.cshtml">
+
+        <div>
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="firstname" />
+        </div>
+
+        <div>
+            <label for="sname">Last Name:</label>
+            <input type="text" id="sname" name="surname" />
+        </div>
+
+        <div>
+            <label for="iban">IBAN:</label>
+            <input type="text" id="iban" name="Iban" />
+        </div>
+
+        <div>
+            <label for="dob">D.O.B:</label>
+            <input type="date" id="dob" name="DateOB" />
+        </div>
+
+        <div>
+            <label for="height">Height:</label>
+            <input type="text" id="height" name="height" />
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" />
+        </div>
+
+        <div>
+            <label for="number">Number:</label>
+            <input type="text" id="number" name="number" />
+        </div>
+
+        <fieldset>
+            <legend>Gender</legend>
+
+            <div>
+                <input type="radio" name="gender" id="male" value="male" />
+                <label for="male">Male</label>
+            </div>
+
+            <div>
+                <input type="radio" name="gender" id="female" value="female" />
+                <label for="female">Female</label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>What Is Your Partner Preference</legend>
+            <div>
+                <input type="radio" name="men" value="men" />
+                <label for="men">Men</label>
+            </div>
+            
+            <div>
+                <input type="radio" name="women" value="women" />
+                <label for="women">Women</label>
+            </div>
+
+            <div>
+                <input type="radio" name="either" value="either" />
+                <label for="either">Either</label>
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Relationship Status</legend>
+
+            <div>
+                <input type="radio" name="status" id="single" value="single" />
+                <label for="single">Single</label>
+            </div>
+
+            <div>
+                <input type="radio" name="status" id="married" value="married" />
+                <label for="married">Married</label>
+            </div>
+
+            <div>
+                <input type="radio" name="status" id="inRelationship" value="inRelationship" />
+                <label for="inRelationship">Relationship</label>
+            </div>
+
+            <div>
+                <input type="radio" name="widowed" id="widowed" value="widowed" />
+                <label for="widowed">Widowed</label>
+            </div>
+
+        </fieldset>
+
+        <input type="submit" value="Send Details" />
+    </form>
+
+</body>
+</html>
