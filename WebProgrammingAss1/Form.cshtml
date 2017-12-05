@@ -13,67 +13,45 @@
     string messageIntrests = "";
 
 
-    if (Request.Form["dob"] != null)
+    if (IsPost && Validation.IsValid())
     {
+
+        messageFname = "Your first name is: " + Request.Form["fname"];
+
+        messageSname = "Your surname is: " + Request.Form["sname"];
+
+        messageIban = "Your IBAN is: " + Request.Form["iban"];
+
+        messageEmail = "Your email is: " + Request.Form["email"];
+
         messageDob = String.Format("Your Date Of Birth Is: {0}", Request.Form["dob"]);
-    }
 
-    if (Request.Form["height"] != null)
-    {
         messageHeight = String.Format("Your Height is: {0}", Request.Form["height"]);
-    }
 
-
-    if (Request.Form["number"] != null)
-    {
         messageNumber = String.Format("Your Number Is: +353{0}", Request.Form["number"]);
-    }
 
-    if (Request.Form["gender"] != null)
-    {
         messageGender = String.Format("You're Gender Is: {0}", Request.Form["gender"]);
-    }
 
-    if (Request.Form["partnerPreference"] != null)
-    {
         messagePartner = String.Format("You're Preferred Partner Is:  {0}", Request.Form["partnerPreference"]);
-    }
 
-    if (Request.Form["relationshipStatus"] != null)
-    {
         messageRelationship = String.Format("Relationship Status: {0}", Request.Form["relationshipStatus"]);
+
+        messageIntrests = String.Format("Your intrests are: {0}", Request.Form["interests"]);
     }
 
-    if (Request.Form["interests"] != null)
-    {
-        messageIntrests =String.Format("Your intrests are: {0}", Request.Form["interests"]);
-    }
 
     Validation.Add("fname", Validator.Required("Please enter a first name"));
+    Validation.Add("iban", Validator.Required("Please enter an IBAN"));
+    Validation.Add("email", Validator.Required("Please enter an email"));
+    Validation.Add("sname", Validator.Required("Please enter a surname"));
+    Validation.Add("dob", Validator.DateTime());
+    Validation.Add("height", Validator.Range(130,220, "Invalid Height"));
 
     if (IsPost && Validation.IsValid())
     {
         messageFname = "Your first name is: " + Request.Form["fname"];
-    }
-
-    Validation.Add("sname", Validator.Required("Please enter a surname"));
-
-    if (IsPost && Validation.IsValid())
-    {
         messageSname = "Your surname is: " + Request.Form["sname"];
-    }
-
-    Validation.Add("iban", Validator.Required("Please enter an IBAN"));
-
-    if (IsPost && Validation.IsValid())
-    {
         messageIban = "Your IBAN is: " + Request.Form["iban"];
-    }
-
-    Validation.Add("email", Validator.Required("Please enter an email"));
-
-    if (IsPost && Validation.IsValid())
-    {
         messageEmail = "Your email is: " + Request.Form["email"];
     }
 
@@ -124,7 +102,7 @@
 
         <div>
             <label for="height">Height (cm):</label>
-            <input type="number" id="height" name="height" min="135" placeholder="170"  max="225" value="@Request.Form["height"]" />
+            <input type="number" id="height" name="height"  placeholder="170" value="@Request.Form["height"]" />
         </div>
 
         <div>

@@ -3,7 +3,7 @@
 }
 
 label {
-    width: 10em;
+    width: 17em;
     display: inline-block;
     text-align: right;
     padding-right: 1em;
@@ -18,7 +18,7 @@ input:focus {
 }
 
 form {
-    width: 25em;
+    width: 40em;
     background-color: sandybrown;
     margin: 0 auto 0 auto;
     padding-right: 0.5em;
@@ -37,4 +37,10 @@ fieldset {
 
     fieldset label {
         width: 1em;
+    }
+
+    .field-validation-error
+    {
+        color: black;
+        border: 3px solid black;
     }
