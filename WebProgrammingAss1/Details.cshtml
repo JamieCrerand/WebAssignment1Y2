@@ -1,9 +1,58 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    string Fname = "";
+    string Sname = "";
+    string iban = "";
+    string dob = "";
+    string height = "";
+    string email = "";
+    string number = "";
+    string gender = "";
+    string partner = "";
+    string relationship = "";
+    string interests = "";
+
+
+    if (Session["fname"] != null || Session["sname"] != null)
+    {
+        Fname = (string)Session["fname"];
+        Sname = (string)Session["sname"];
+        iban = (string)Session["iban"];
+        dob = (string)Session["dob"];
+        height = (string)Session["height"];
+        email = (string)Session["email"];
+        number = (string)Session["number"];
+        gender = (string)Session["gender"];
+        partner = (string)Session["partnerPreference"];
+        relationship = (string)Session["relationshipStatus"];
+        interests = (string)Session["interests"];
+    }
+}
+
+
+<!DOCTYPE html>
 <html>
     <head>
         <title></title>
+        <link href="~/FormStyle.css" rel="stylesheet" />
     </head>
     <body>
+        <form>
+            Name Is: @Fname <br />
+            Surname is: @Sname<br />
+            IBAN is: @iban<br />
+            Date of birth is: @dob<br />
+            Height is: @height<br />
+            Email is: @email<br />
+            Number is: +353 @number<br />
+            Gender is: @gender<br />
+            Partner preference is: @partner<br />
+            Relationship Status is: @relationship<br />
+            Interests are: @interests<br />
 
+         
+
+        </form>
+        <button onclick="window.location.href='/Form.cshtml'">Back To Edit</button>
+        <button onclick="window.location.href='/SavedData.cshtml'">Save Data</button>
     </body>
 </html>

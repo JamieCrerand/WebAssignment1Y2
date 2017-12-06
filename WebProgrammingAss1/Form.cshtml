@@ -12,32 +12,34 @@
     string messagePartner = "";
     string messageRelationship = "";
     string messageIntrests = "";
-
+    
 
     if (IsPost && Validation.IsValid())
     {
+        
+       Session ["fname"] = Request.Form["fname"];
 
-        messageFname = "Your first name is: " + Request.Form["fname"];
+       Session ["sname"] = Request.Form["sname"];
 
-        messageSname = "Your surname is: " + Request.Form["sname"];
+       Session  ["iban"] = Request.Form["iban"];
 
-        messageIban = "Your IBAN is: " + Request.Form["iban"];
+       Session ["email"] = Request.Form["email"];
 
-        messageEmail = "Your email is: " + Request.Form["email"];
+       Session ["dob"] = Request.Form["dob"];
 
-        messageDob = String.Format("Your Date Of Birth Is: {0}", Request.Form["dob"]);
+       Session ["height"] = Request.Form["height"];
 
-        messageHeight = String.Format("Your Height is: {0} cm", Request.Form["height"]);
+       Session ["number"] = Request.Form["number"];
 
-        messageNumber = String.Format("Your Number Is: +353{0}", Request.Form["number"]);
+       Session ["gender"] = Request.Form["gender"];
 
-        messageGender = String.Format("You're Gender Is: {0}", Request.Form["gender"]);
+       Session ["partnerPreference"] =  Request.Form["partnerPreference"];
 
-        messagePartner = String.Format("You're Preferred Partner Is:  {0}", Request.Form["partnerPreference"]);
+       Session ["relationshipStatus"] = Request.Form["relationshipStatus"];
 
-        messageRelationship = String.Format("Relationship Status: {0}", Request.Form["relationshipStatus"]);
+       Session ["interests"] = Request.Form["interests"];
 
-        messageIntrests = String.Format("Your intrests are: {0}", Request.Form["interests"]);
+        Response.Redirect("Details.cshtml");
     }
 
 
@@ -50,7 +52,7 @@
 
     if (IsPost && Validation.IsValid())
     {
-        messageFname = "Your first name is: " + Request.Form["fname"];
+       Session ["fname"] = "Your first name is: " + Request.Form["fname"];
         messageSname = "Your surname is: " + Request.Form["sname"];
         messageIban = "Your IBAN is: " + Request.Form["iban"];
         messageEmail = "Your email is: " + Request.Form["email"];
@@ -104,6 +106,7 @@
         <div>
             <label for="height">Height (cm):</label>
             <input type="number" id="height" name="height"  placeholder="170" value="@Request.Form["height"]" />
+            @Html.ValidationMessage("height")
         </div>
 
         <div>
@@ -219,28 +222,6 @@
 
         
     </form>
-
-    @messageFname
-    <br />
-    @messageSname
-    <br />
-    @messageIban
-    <br />
-    @messageDob
-    <br />
-    @messageHeight
-    <br />
-    @messageEmail
-    <br />
-    @messageNumber
-    <br />
-    @messageGender
-    <br />
-    @messagePartner
-    <br />
-    @messageRelationship
-    <br />
-    @messageIntrests
 
 </body>
 </html>
