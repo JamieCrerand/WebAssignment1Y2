@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     <!--String messages to output user values-->
     string messageFname = "";
     string messageSname = "";
@@ -26,7 +27,7 @@
 
         messageDob = String.Format("Your Date Of Birth Is: {0}", Request.Form["dob"]);
 
-        messageHeight = String.Format("Your Height is: {0}", Request.Form["height"]);
+        messageHeight = String.Format("Your Height is: {0} cm", Request.Form["height"]);
 
         messageNumber = String.Format("Your Number Is: +353{0}", Request.Form["number"]);
 
@@ -214,6 +215,7 @@
         </fieldset>
 
         <input type="submit" value="Submit" />
+        
 
         
     </form>
