@@ -4,62 +4,57 @@
     string messageFname = "";
     string messageSname = "";
     string messageIban = "";
-    string messageDob = "";
-    string messageHeight = "";
     string messageEmail = "";
-    string messageNumber = "";
-    string messageGender = "";
-    string messagePartner = "";
-    string messageRelationship = "";
-    string messageIntrests = "";
-    
-
-    if (IsPost && Validation.IsValid())
-    {
-        
-       Session ["fname"] = Request.Form["fname"];
-
-       Session ["sname"] = Request.Form["sname"];
-
-       Session  ["iban"] = Request.Form["iban"];
-
-       Session ["email"] = Request.Form["email"];
-
-       Session ["dob"] = Request.Form["dob"];
-
-       Session ["height"] = Request.Form["height"];
-
-       Session ["number"] = Request.Form["number"];
-
-       Session ["gender"] = Request.Form["gender"];
-
-       Session ["partnerPreference"] =  Request.Form["partnerPreference"];
-
-       Session ["relationshipStatus"] = Request.Form["relationshipStatus"];
-
-       Session ["interests"] = Request.Form["interests"];
-
-        Response.Redirect("Details.cshtml");
-    }
-
 
     Validation.Add("fname", Validator.Required("Please enter a first name"));
     Validation.Add("iban", Validator.Required("Please enter an IBAN"));
     Validation.Add("email", Validator.Required("Please enter an email"));
     Validation.Add("sname", Validator.Required("Please enter a surname"));
     Validation.Add("dob", Validator.DateTime());
-    Validation.Add("height", Validator.Range(130,220, "Invalid Height"));
+    Validation.Add("height", Validator.Range(130, 220, "Invalid Height"));
+    Validation.Add("iban", Validator.Regex(@"^IE\d{2}\s?([0-9a-zA-Z]{4}\s?){4}[0-9a-zA-Z]{2}", "Invalid IBAN"));
+    Validation.Add("number", Validator.Regex(@"[8][0-9]{8}", "Invalid Phone Number"));
 
-    if (IsPost && Validation.IsValid())
+
+    if (IsPost)
     {
-       Session ["fname"] = "Your first name is: " + Request.Form["fname"];
-        messageSname = "Your surname is: " + Request.Form["sname"];
-        messageIban = "Your IBAN is: " + Request.Form["iban"];
-        messageEmail = "Your email is: " + Request.Form["email"];
+        if (Validation.IsValid())
+        {
+
+            Session["fname"] = Request.Form["fname"];
+
+            Session["sname"] = Request.Form["sname"];
+
+            Session["iban"] = Request.Form["iban"];
+
+            Session["email"] = Request.Form["email"];
+
+            Session["dob"] = Request.Form["dob"];
+
+            Session["height"] = Request.Form["height"];
+
+            Session["number"] = Request.Form["number"];
+
+            Session["gender"] = Request.Form["gender"];
+
+            Session["partnerPreference"] = Request.Form["partnerPreference"];
+
+            Session["relationshipStatus"] = Request.Form["relationshipStatus"];
+
+            Session["interests"] = Request.Form["interests"];
+
+            Response.Redirect("Details.cshtml");
+        }
     }
 
+    else
+    {
+        messageFname = Request.Form["fname"];
+        messageSname = Request.Form["sname"];
+        messageIban = Request.Form["iban"];
+        messageEmail = Request.Form["email"];
 
-
+    }
 
 
     }
@@ -81,22 +76,22 @@
 
     <!--Form for user typed details-->
     
-    <form method="post">
+    <form  method="post">
 
         <div>
             <label for="fname">First Name:</label>
-            <input type="text" id="fname" name="fname" pattern="[A-Za-z]{1,}" placeholder="John" value="@Request.Form["fname"]"  />
+            <input type="text" id="fname" name="fname" pattern="[A-Za-z]{1,}" placeholder="John" value="@messageFname" autocomplete="on"  />
             @Html.ValidationMessage("fname")
         </div>
 
         <div>
             <label for="sname">Last Name:</label>
-            <input type="text" id="sname" name="sname" pattern="[A-Za-z]{1,}" placeholder="Doe" value="@Request.Form["sname"]" />
+            <input type="text" id="sname" name="sname" pattern="[A-Za-z]{1,}" placeholder="Doe" value="@messageSname" />
             @Html.ValidationMessage("sname")
         </div>
 
         <label for="iban">IBAN:</label>
-        <input type="text" id="iban" name="iban" placeholder="IE29AIBK93115212345678" pattern="^IE\d{2}\s?([0-9a-zA-Z]{4}\s?){4}[0-9a-zA-Z]{2}" value="@Request.Form["iban"]"  />
+        <input type="text" id="iban" name="iban" placeholder="IE29AIBK93115212345678" value="@messageIban"  />
         @Html.ValidationMessage("iban")
         <div>
             <label for="dob">D.O.B:</label>
@@ -111,13 +106,13 @@
 
         <div>
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="JohnDoe@yawee.com" value="@Request.Form["email"]" />
+            <input type="email" id="email" name="email" placeholder="JohnDoe@yawee.com" value="@messageEmail" />
             @Html.ValidationMessage("email")
         </div>
 
         <div>
             <label for="number">Number (+353):</label>
-            <input type="text" id="number" name="number" placeholder="856246034" pattern="[8][0-9]{8}" value="@Request.Form["number"]" />
+            <input type="text" id="number" name="number" placeholder="856246034" value="@Request.Form["number"]" />
         </div>
 
         <fieldset>
@@ -218,7 +213,6 @@
         </fieldset>
 
         <input type="submit" value="Submit" />
-        
 
         
     </form>
