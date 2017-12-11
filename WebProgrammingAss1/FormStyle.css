@@ -1,6 +1,9 @@
 ﻿body {
     background-color: burlywood;
+    
 }
+
+
 
 label {
     width: 17em;
@@ -22,11 +25,13 @@ form {
     background-color: sandybrown;
     margin: 0 auto 0 auto;
     padding-right: 0.5em;
+
 }
 
 input[type="submit"] {
     margin-top: 0.5em;
     margin-left: 75%;
+    cursor:pointer;
 }
 
 fieldset {
@@ -43,4 +48,11 @@ fieldset {
     {
         color: black;
         border: 3px solid black;
+        background-color: aquamarine;
+    }
+    button
+    {
+        margin-left: 45%;
+        width: 10em;
+        cursor:pointer;
     }

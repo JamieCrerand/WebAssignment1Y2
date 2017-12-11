@@ -1,6 +1,6 @@
 ﻿
 @{
-    <!--String messages to output user values-->
+    <!--String messages to store and output user values-->
     string messageFname = "";
     string messageSname = "";
     string messageIban = "";
@@ -17,6 +17,7 @@
     if (IsPost)
     {
         #region
+        //Validators for user inputs 
         Validation.Add("fname", Validator.Required("Please enter a first name"));
         Validation.Add("iban", Validator.Required("Please enter an IBAN"));
         Validation.Add("email", Validator.Required("Please enter an email"));
@@ -28,7 +29,7 @@
 
         if (Validation.IsValid())
         {
-
+            //Session states for the user input 
             Session["fname"] = Request.Form["fname"];
 
             Session["sname"] = Request.Form["sname"];
@@ -91,8 +92,11 @@
             messageRelationship = (string)Session["relationshipStatus"];
             messageInterests = (string)Session["interests"];
         }
+
+      
     }
     #endregion
+
 
 
 
@@ -103,12 +107,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Form</title>
+    <title>Love Nest</title>
 
     <!--Style sheet used for design of website-->
     <link href="FormStyle.css" rel="stylesheet" />
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
+    <link rel="icon" href="http://www.freeiconspng.com/uploads/heart-png-15.png" />
 
 </head>
 <body>

@@ -1,4 +1,5 @@
 ﻿@{ 
+    //String values for session state 
     string Fname = "";
     string Sname = "";
     string iban = "";
@@ -30,7 +31,8 @@
     }
     else
     {
-        Response.Redirect("~/Form.cshtml");
+        //If the session is not valid the user will be sent to this page 
+        Response.Redirect("~/Error.cshtml");
     }
 }
 
@@ -38,11 +40,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Love Nest</title>
         <link href="~/FormStyle.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" />
+        <link rel="icon" href="http://www.freeiconspng.com/uploads/heart-png-15.png" />
+
     </head>
     <body>
         <form>
+            <!--Output for user detalis-->
+
             Name Is: @Fname <br />
             Surname is: @Sname<br />
             IBAN is: @iban<br />
@@ -58,6 +65,7 @@
          
 
         </form>
+        <!--Buttons to direct the user back to the desired pages-->
         <button onclick="window.location.href='/Form.cshtml'">Back To Edit</button>
         <button onclick="window.location.href='/SavedData.cshtml'">Save Data</button>
     </body>
