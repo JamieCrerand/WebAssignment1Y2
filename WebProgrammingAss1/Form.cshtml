@@ -5,19 +5,27 @@
     string messageSname = "";
     string messageIban = "";
     string messageEmail = "";
-
-    Validation.Add("fname", Validator.Required("Please enter a first name"));
-    Validation.Add("iban", Validator.Required("Please enter an IBAN"));
-    Validation.Add("email", Validator.Required("Please enter an email"));
-    Validation.Add("sname", Validator.Required("Please enter a surname"));
-    Validation.Add("dob", Validator.DateTime());
-    Validation.Add("height", Validator.Range(130, 220, "Invalid Height"));
-    Validation.Add("iban", Validator.Regex(@"^IE\d{2}\s?([0-9a-zA-Z]{4}\s?){4}[0-9a-zA-Z]{2}", "Invalid IBAN"));
-    Validation.Add("number", Validator.Regex(@"[8][0-9]{8}", "Invalid Phone Number"));
+    string messageDob = "";
+    string messageHeight = "";
+    string messageNumber = "";
+    string messageGender = "";
+    string messagePartner = "";
+    string messageRelationship = "";
+    string messageInterests = "";
 
 
     if (IsPost)
     {
+        #region
+        Validation.Add("fname", Validator.Required("Please enter a first name"));
+        Validation.Add("iban", Validator.Required("Please enter an IBAN"));
+        Validation.Add("email", Validator.Required("Please enter an email"));
+        Validation.Add("sname", Validator.Required("Please enter a surname"));
+        Validation.Add("dob", Validator.DateTime());
+        Validation.Add("height", Validator.Range(130, 220, "Invalid Height"));
+        Validation.Add("iban", Validator.Regex(@"^IE\d{2}\s?([0-9a-zA-Z]{4}\s?){4}[0-9a-zA-Z]{2}", "Invalid IBAN"));
+        Validation.Add("number", Validator.Regex(@"[8][0-9]{8}", "Invalid Phone Number"));
+
         if (Validation.IsValid())
         {
 
@@ -45,16 +53,47 @@
 
             Response.Redirect("Details.cshtml");
         }
-    }
+        else
+        {
+            messageFname = Request.Form["fname"];
+            messageSname = Request.Form["sname"];
+            messageIban = Request.Form["iban"];
+            messageDob = Request.Form["dob"];
+            messageHeight = Request.Form["height"];
+            messageEmail = Request.Form["email"];
+            messageNumber = Request.Form["number"];
+            messageGender = Request.Form["gender"];
+            messagePartner = Request.Form["partnerPreference"];
+            messageRelationship = Request.Form["relationshipStatus"];
+            messageInterests = Request.Form["interests"];
 
+        }
+
+    }
+    #endregion
     else
-    {
-        messageFname = Request.Form["fname"];
-        messageSname = Request.Form["sname"];
-        messageIban = Request.Form["iban"];
-        messageEmail = Request.Form["email"];
+    #region
 
+    {
+        if ((Session["fname"] != null || Session["sname"] != null || Session["iban"] != null || Session["dob"] != null || Session["height"] != null ||
+        Session["email"] != null || Session["number"] != null || Session["gender"] != null || Session["partnerPreference"] != null
+        || Session["relationshipStatus"] != null || Session["interests"] != null))
+        {
+            messageFname = (string)Session["fname"];
+            messageSname = (string)Session["sname"];
+            messageIban = (string)Session["iban"];
+            messageDob = (string)Session["dob"];
+            messageHeight = (string)Session["height"];
+            messageEmail = (string)Session["email"];
+            messageNumber = (string)Session["number"];
+            messageGender = (string)Session["gender"];
+            messagePartner = (string)Session["partnerPreference"];
+            messageRelationship = (string)Session["relationshipStatus"];
+            messageInterests = (string)Session["interests"];
+        }
     }
+    #endregion
+
 
 
     }
@@ -95,12 +134,12 @@
         @Html.ValidationMessage("iban")
         <div>
             <label for="dob">D.O.B:</label>
-            <input type="date" id="dob" name="dob" min="1960-12-31" max="1998-12-31" value="@Request.Form["dob"]"  />
+            <input type="date" id="dob" name="dob" min="1960-12-31" max="1998-12-31" value="@messageDob"  />
         </div>
 
         <div>
             <label for="height">Height (cm):</label>
-            <input type="number" id="height" name="height"  placeholder="170" value="@Request.Form["height"]" />
+            <input type="number" id="height" name="height"  placeholder="170" value="@messageHeight" />
             @Html.ValidationMessage("height")
         </div>
 
@@ -112,7 +151,7 @@
 
         <div>
             <label for="number">Number (+353):</label>
-            <input type="text" id="number" name="number" placeholder="856246034" value="@Request.Form["number"]" />
+            <input type="text" id="number" name="number" placeholder="856246034" value="@messageNumber" />
         </div>
 
         <fieldset>
@@ -120,12 +159,12 @@
             <legend>Gender</legend>
 
             <div>
-                <input type="radio" name="gender" id="male" value="Male" @(Request.Form["gender"] == "Male" ? "checked" : "")  />
+                <input type="radio" name="gender" id="male" value="Male" @(messageGender == "Male" ? "checked" : "")  />
                 <label for="male">Male</label>
             </div>
 
             <div>
-                <input type="radio" name="gender" id="female" value="Female"  @(Request.Form["gender"] == "Female" ? "checked" : "")  />
+                <input type="radio" name="gender" id="female" value="Female"  @(messageGender == "Female" ? "checked" : "")  />
                 <label for="female">Female</label>
             </div>
         </fieldset>
@@ -134,17 +173,17 @@
             <!--User choice for Partner preference-->
             <legend>What Is Your Partner Preference</legend>
             <div>
-                <input type="radio" id="men" name="partnerPreference" value="Men" @(Request.Form["partnerPreference"] == "Men" ? "checked" : "") />
+                <input type="radio" id="men" name="partnerPreference" value="Men" @(messagePartner == "Men" ? "checked" : "") />
                 <label for="men">Men</label>
             </div>
 
             <div>
-                <input type="radio" id="women" name="partnerPreference" value="Women" @(Request.Form["partnerPreference"] == "Women" ? "checked" : "") />
+                <input type="radio" id="women" name="partnerPreference" value="Women" @(messagePartner == "Women" ? "checked" : "") />
                 <label for="women">Women</label>
             </div>
 
             <div>
-                <input type="radio" id="either" name="partnerPreference" value="Either" @(Request.Form["partnerPreference"] == "Either" ? "checked" : "")/>
+                <input type="radio" id="either" name="partnerPreference" value="Either" @(messagePartner == "Either" ? "checked" : "")/>
                 <label for="either">Either</label>
             </div>
 
@@ -155,22 +194,22 @@
             <legend>Relationship Status</legend>
 
             <div>
-                <input type="radio" name="relationshipStatus" id="single" value="Single" @(Request.Form["relationshipStatus"] == "Single" ? "checked" : "") />
+                <input type="radio" name="relationshipStatus" id="single" value="Single" @(messageRelationship == "Single" ? "checked" : "") />
                 <label for="single">Single</label>
             </div>
 
             <div>
-                <input type="radio" name="relationshipStatus" id="married" value="Married" @(Request.Form["relationshipStatus"] == "Married" ? "checked" : "") />
+                <input type="radio" name="relationshipStatus" id="married" value="Married" @(messageRelationship == "Married" ? "checked" : "") />
                 <label for="married">Married</label>
             </div>
 
             <div>
-                <input type="radio" name="relationshipStatus" id="inRelationship" value="In Relationship" @(Request.Form["relationshipStatus"] == "In Relationship" ? "checked" : "") />
+                <input type="radio" name="relationshipStatus" id="inRelationship" value="In Relationship" @(messageRelationship == "In Relationship" ? "checked" : "") />
                 <label for="inRelationship">Relationship</label>
             </div>
 
             <div>
-                <input type="radio" name="relationshipStatus" id="widowed" value="Widowed" @(Request.Form["relationshipStatus"] == "Widowed" ? "checked" : "") />
+                <input type="radio" name="relationshipStatus" id="widowed" value="Widowed" @(messageRelationship == "Widowed" ? "checked" : "") />
                 <label for="widowed">Widowed</label>
             </div>
 
@@ -181,32 +220,32 @@
             <legend>Intrests</legend>
 
             <div>
-                <input type="checkbox" name="interests" id="OutDoorSports" value="Outdoor Sports" @(Request.Form["interests"] ==  "Outdoor Sports" ? "checked" : "")/>
+                <input type="checkbox" name="interests" id="OutDoorSports" value="Outdoor Sports" @(messageInterests ==  "Outdoor Sports" ? "checked" : "")/>
                 <label for="OutDoorSports">Outdoor Sports</label>
             </div>
 
             <div>
-                <input type="checkbox" name="interests" id="Movies" value="Movies" @(Request.Form["interests"] ==  "Movies" ? "checked" : "")/>
+                <input type="checkbox" name="interests" id="Movies" value="Movies" @(messageInterests ==  "Movies" ? "checked" : "")/>
                 <label for="Movies">Movies</label>
             </div>
 
             <div>
-                <input type="checkbox" name="interests" id="Music" value="Music" @(Request.Form["interests"] ==  "Music" ? "checked" : "")/>
+                <input type="checkbox" name="interests" id="Music" value="Music" @(messageInterests ==  "Music" ? "checked" : "")/>
                 <label for="Music">Music</label>
             </div>
 
             <div>
-                <input type="checkbox" name="interests" id="Gaming" value="Gaming" @(Request.Form["interests"] ==  "Gaming" ? "checked" : "") />
+                <input type="checkbox" name="interests" id="Gaming" value="Gaming" @(messageInterests ==  "Gaming" ? "checked" : "") />
                 <label for="Gaming">Gaming</label>
             </div>
 
             <div>
-                <input type="checkbox" name="interests" id="books" value="Books" @(Request.Form["Books"] ==  "selected" ? "checked" : "")/>
+                <input type="checkbox" name="interests" id="books" value="Books" @(messageInterests ==  "selected" ? "checked" : "")/>
                 <label for="books">Books</label>
             </div>
 
             <div>
-                <input type="checkbox" name="interests" id="drinking" value="Drinking" @(Request.Form["Drinking"] ==  "selected" ? "checked" : "")>
+                <input type="checkbox" name="interests" id="drinking" value="Drinking" @(messageInterests ==  "selected" ? "checked" : "")>
                 <label for="drinking">Drinking</label>
             </div>
 
